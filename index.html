@@ -3,320 +3,285 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shristi Sharma | PHP Developer</title>
+<title>Shristi Sharma | Senior PHP Developer</title>
 
 <style>
-/* ================= ROOT ================= */
-:root {
-  --primary: #6366f1;
-  --secondary: #22d3ee;
-  --dark: #0f172a;
-  --light: #f8fafc;
-  --glass: rgba(255,255,255,0.75);
+:root{
+  --primary:#6366f1;
+  --secondary:#22d3ee;
+  --dark:#0f172a;
+  --glass:rgba(255,255,255,.85);
 }
 
-/* ================= RESET ================= */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', system-ui, sans-serif;
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,Segoe UI,sans-serif}
+
+body{
+  color:var(--dark);
+  background:
+    linear-gradient(rgba(255,255,255,.88),rgba(255,255,255,.88)),
+    url('bg-light.jpg') center/cover fixed;
+  overflow-x:hidden;
 }
 
-body {
-  background: linear-gradient(120deg, #eef2ff, #ecfeff);
-  color: var(--dark);
-  overflow-x: hidden;
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(99,102,241,.15), transparent 40%),
+    radial-gradient(circle at 80% 30%, rgba(34,211,238,.15), transparent 40%);
+  animation:bgMove 18s infinite alternate linear;
+  z-index:-1;
 }
 
-/* ================= BACKGROUND ANIMATION ================= */
-.bg {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  overflow: hidden;
+@keyframes bgMove{
+  from{transform:translateY(0)}
+  to{transform:translateY(-40px)}
 }
 
-.blob {
-  position: absolute;
-  width: 400px;
-  height: 400px;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  opacity: 0.25;
-  filter: blur(80px);
-  border-radius: 50%;
-  animation: float 18s infinite alternate ease-in-out;
+.container{
+  max-width:1050px;
+  margin:auto;
+  padding:40px 20px 30px;
 }
 
-.blob:nth-child(1) {
-  top: -100px;
-  left: -100px;
+section{margin-bottom:32px}
+
+h2{
+  font-size:1.35rem;
+  margin-bottom:12px;
+  color:var(--primary);
 }
 
-.blob:nth-child(2) {
-  bottom: -120px;
-  right: -120px;
-  animation-delay: 6s;
+header{
+  display:flex;
+  align-items:center;
+  gap:25px;
+  margin-bottom:35px;
 }
 
-.blob:nth-child(3) {
-  top: 40%;
-  left: 60%;
-  animation-delay: 12s;
+header img{
+  
+    width: 120px;
+    height: 135px;
+    border-radius: 51%;
+    
+  object-fit:cover;
+  border:4px solid #fff;
+  box-shadow:0 10px 25px rgba(0,0,0,.12);
 }
 
-@keyframes float {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(80px, -60px) scale(1.2); }
+.header-text h1{
+  font-size:2.2rem;
+  font-weight:800;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
 
-/* ================= LAYOUT ================= */
-.container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 90px 20px;
+.header-text p{font-size:1.05rem;color:#334155;margin:5px 0}
+
+.contact{font-size:.9rem;color:#475569}
+
+.card{
+  background:var(--glass);
+  backdrop-filter:blur(10px);
+  padding:18px 22px;
+  border-radius:16px;
+  box-shadow:0 15px 30px rgba(0,0,0,.08);
 }
 
-section {
-  margin-bottom: 70px;
+.exp{margin-bottom:16px}
+.exp h3{font-size:1.05rem;font-weight:600}
+.exp span{font-size:.85rem;color:#475569}
+
+ul{margin-top:6px;padding-left:18px}
+ul li{font-size:.9rem;margin-bottom:4px}
+
+.skills{display:flex;flex-wrap:wrap;gap:10px}
+.skill{
+  padding:7px 14px;
+  border-radius:20px;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  color:#fff;font-size:.8rem;font-weight:600;
 }
 
-h2 {
-  font-size: 1.9rem;
-  margin-bottom: 25px;
-  position: relative;
+.projects a{
+  color:#1d4ed8;
+  text-decoration:none;
+  font-size:.9rem;
+}
+.projects a:hover{text-decoration:underline}
+
+footer{
+  text-align:center;
+  font-size:.75rem;
+  color:#64748b;
+  margin-top:25px;
 }
 
-h2::after {
-  content: '';
-  position: absolute;
-  width: 55px;
-  height: 4px;
-  background: linear-gradient(90deg, var(--primary), var(--secondary));
-  bottom: -10px;
-  left: 0;
-  border-radius: 10px;
+/* Scroll animation */
+.reveal{
+  opacity:0;
+  transform:translateY(30px);
+  transition:.7s ease;
+}
+.reveal.active{
+  opacity:1;
+  transform:none;
 }
 
-/* ================= HEADER ================= */
-header {
-  text-align: center;
-  margin-bottom: 90px;
-  animation: fadeDown 1s ease forwards;
-}
-
-header img {
-  width: 160px;
-  height: 160px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 5px solid white;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-  margin-bottom: 20px;
-}
-
-header h1 {
-  font-size: 3rem;
-  font-weight: 800;
-  background: linear-gradient(90deg, var(--primary), var(--secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-header p {
-  font-size: 1.25rem;
-  margin-top: 8px;
-  color: #334155;
-}
-
-.contact {
-  margin-top: 20px;
-  color: #475569;
-}
-
-.contact span {
-  margin: 0 10px;
-}
-
-/* ================= CARD ================= */
-.card {
-  background: var(--glass);
-  backdrop-filter: blur(14px);
-  border-radius: 20px;
-  padding: 35px;
-  box-shadow: 0 25px 50px rgba(0,0,0,0.1);
-  animation: fadeUp 1s ease forwards;
-}
-
-/* ================= EXPERIENCE ================= */
-.exp {
-  margin-bottom: 30px;
-}
-
-.exp h3 {
-  font-size: 1.25rem;
-}
-
-.exp span {
-  color: #475569;
-  font-size: 0.9rem;
-}
-
-ul {
-  margin-top: 12px;
-  padding-left: 20px;
-}
-
-ul li {
-  margin-bottom: 8px;
-}
-
-/* ================= SKILLS ================= */
-.skills {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 15px;
-}
-
-.skill {
-  padding: 14px;
-  text-align: center;
-  border-radius: 14px;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: white;
-  font-weight: 600;
-  transition: transform 0.3s ease;
-}
-
-.skill:hover {
-  transform: scale(1.08);
-}
-
-/* ================= FOOTER ================= */
-footer {
-  text-align: center;
-  margin-top: 100px;
-  font-size: 0.85rem;
-  color: #64748b;
-}
-
-/* ================= ANIMATIONS ================= */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(40px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeDown {
-  from { opacity: 0; transform: translateY(-40px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ================= RESPONSIVE ================= */
-@media (max-width: 768px) {
-  header h1 {
-    font-size: 2.3rem;
-  }
-  .container {
-    padding: 70px 15px;
-  }
+@media(max-width:768px){
+  header{flex-direction:column;text-align:center}
+  header img{width:100px;height:100px}
+  .header-text h1{font-size:1.9rem}
 }
 </style>
 </head>
 
 <body>
 
-<!-- Background Animation -->
-<div class="bg">
-  <div class="blob"></div>
-  <div class="blob"></div>
-  <div class="blob"></div>
-</div>
-
 <div class="container">
 
-<header>
-  <!-- Replace profile.jpg with your photo -->
-  <img src="profile.jpg" alt="Shristi Sharma">
-  <h1>Shristi Sharma</h1>
-  <p>PHP Developer · Web Application Specialist</p>
-  <div class="contact">
-    <span>📞 9848189040</span>
-    <span>✉️ shristis707@gmail.com</span>
+<header class="reveal">
+  <!--<img src="profile.jpg" alt="Shristi Sharma">-->
+  <div class="header-text">
+    <h1>Shristi Sharma</h1>
+    <p>PHP Developer</p>
+    <div class="contact">
+      📞 9848189040 | ✉️ shristis707@gmail.com
+    </div>
   </div>
 </header>
 
-<section>
-  <h2>About Me</h2>
-  <div class="card">
-    <p>
-      I am a PHP Developer with over <strong>3 years of experience</strong> in building
-      scalable, secure, and high-performance web applications. I hold a Bachelor’s
-      degree in Information Technology and have worked extensively on backend logic,
-      databases, and application optimization.
-    </p><br>
-    <p>
-      I am passionate about clean code, modern technologies, and delivering solutions
-      that create real business impact.
-    </p>
-  </div>
+<section class="reveal">
+<h2>About</h2>
+<div class="card">
+PHP Developer with <strong>4+ years</strong> of experience in
+CRM systems, government portals, and enterprise web applications.
+Strong expertise in backend development, database design, leadership,
+and delivering scalable, data-driven solutions.
+</div>
 </section>
 
-<section>
-  <h2>Experience</h2>
-  <div class="card">
+<section class="reveal">
+<h2>Experience</h2>
+<div class="card">
 
-    <div class="exp">
-      <h3>PHP Developer</h3>
-      <span>Dry Ice Solutions Pvt. Ltd · 3+ Years</span>
-      <ul>
-        <li>Developed and maintained PHP-based web applications</li>
-        <li>Optimized backend performance and database queries</li>
-        <li>Collaborated with teams to deliver client-focused solutions</li>
-        <li>Ensured security, scalability, and clean architecture</li>
-      </ul>
-    </div>
+<div class="exp">
+<h3>PHP Developer – CRM (CALL-US)</h3>
+<span>Kalash Services · BPO Solutions · 1 Year – Present</span>
+<ul>
+<li>Leading end-to-end development of CRM for call & contact center operations</li>
+<li>Managing developers, sprint planning, code reviews, and deployments</li>
+<li>Designed agent workflows, call tracking, reporting & analytics modules</li>
+<li>Coordinating with stakeholders to deliver data-driven business solutions</li>
+<li>Ensuring performance, security, scalability & system reliability</li>
+</ul>
+</div>
 
-    <div class="exp">
-      <h3>PHP Intern</h3>
-      <span>Guru Infosys · 3 Months</span>
-      <ul>
-        <li>Hands-on training with real-world PHP projects</li>
-        <li>Learned development best practices</li>
-      </ul>
-    </div>
+<div class="exp">
+<h3>PHP Developer</h3>
+<span>Dryice Solutions Pvt. Ltd · Feb 2021 – Oct 2024</span>
+<ul>
+<li>Writing clean, efficient, and well-documented PHP code</li>
+<li>Collaborating with UX/UI designers, backend teams & PMs</li>
+<li>Debugging, testing, optimizing performance & scalability</li>
+<li>Managing existing codebases, feature enhancements & CI workflows</li>
+<li>Following Agile, version control & SDLC best practices</li>
+</ul>
+</div>
 
-  </div>
+<div class="exp">
+<h3>PHP Intern</h3>
+<span>Guru Infosys · Aug 2018 – Jan 2019</span>
+<ul>
+<li>Software specifications, database modelling & query design</li>
+<li>System improvement ideas & database migration</li>
+</ul>
+</div>
+
+</div>
 </section>
 
-<section>
-  <h2>Education</h2>
-  <div class="card">
-    <h3>Bachelor’s Degree in Information Technology</h3>
-    <span>Completed</span>
-  </div>
+<section class="reveal">
+<h2>Education</h2>
+<div class="card">
+<ul>
+<li><strong>SLC</strong> – Brightland Higher Secondary School, Nepalgunj</li>
+<li><strong>Intermediate (Science)</strong> – The Times Int'l College, Kathmandu</li>
+<li><strong>Bachelor’s in Information Technology</strong> – Islington College, Kathmandu</li>
+</ul>
+</div>
 </section>
 
-<section>
-  <h2>Skills</h2>
-  <div class="card">
-    <div class="skills">
-      <div class="skill">PHP</div>
-      <div class="skill">MySQL</div>
-      <div class="skill">HTML</div>
-      <div class="skill">CSS</div>
-      <div class="skill">JavaScript</div>
-      <div class="skill">Backend Development</div>
-      <div class="skill">Web Applications</div>
-      <div class="skill">Problem Solving</div>
-    </div>
-  </div>
+<section class="reveal">
+<h2>Skills</h2>
+<div class="card">
+<div class="skills">
+<div class="skill">PHP (Laravel, CodeIgniter)</div>
+<div class="skill">MySQL</div>
+<div class="skill">PostgreSQL</div>
+<div class="skill">HTML</div>
+<div class="skill">JavaScript</div>
+<div class="skill">jQuery</div>
+<div class="skill">DBMS</div>
+<div class="skill">CRM Systems</div>
+<div class="skill">Team Leadership</div>
+<div class="skill">Planning & Management</div>
+<div class="skill">Networking Basics</div>
+<div class="skill">Communication</div>
+</div>
+</div>
 </section>
 
-<footer>
-  © 2026 Shristi Sharma · PHP Developer Portfolio
+<section class="reveal">
+<h2>Projects</h2>
+<div class="card projects">
+<ul>
+<li><a href="https://cm.bpbb.p2.gov.np/my-admin/login" target="_blank">Mukhyamantri Beti Padhao, Beti Bachao (BPBB)</a></li>
+<li><a href="http://www.beegroup.org.np" target="_blank">BEE Group Website</a></li>
+<li><a href="https://loe.moecdc.gov.np" target="_blank">Letter of Equivalence System (CDC)</a></li>
+<li><a href="https://mof.madhesh.gov.np/np" target="_blank">Madhesh Pradesh Ministry of Finance</a></li>
+<li><a href="https://mec.gov.np" target="_blank">Medical Education Commission</a></li>
+<li><a href="https://ilmis.dolos.gov.np" target="_blank">Integrated Labour MIS (ILMIS)</a></li>
+<li>Android Patient Tracker, TMS, DMS, Online Exam</li>
+<li>Lease Contract System</li>
+</ul>
+</div>
+</section>
+
+<section class="reveal">
+<h2>Supported Projects</h2>
+<div class="card projects">
+<ul>
+<li><a href="https://register.nec.gov.np" target="_blank">Nepal Engineering Council</a></li>
+<li><a href="https://eir.nta.gov.np" target="_blank">Mobile Handset Identity Registry</a></li>
+<li><a href="https://www.rbcl.gov.np" target="_blank">Rastriya Beema Company Ltd</a></li>
+</ul>
+</div>
+</section>
+
+<footer class="reveal">
+© 2026 Shristi Sharma · Senior PHP Developer
 </footer>
 
 </div>
+
+<script>
+const reveals=document.querySelectorAll('.reveal');
+function onScroll(){
+  const h=window.innerHeight;
+  reveals.forEach(el=>{
+    const t=el.getBoundingClientRect().top;
+    const b=el.getBoundingClientRect().bottom;
+    if(t<h-80 && b>80){el.classList.add('active')}
+    else{el.classList.remove('active')}
+  });
+}
+window.addEventListener('scroll',onScroll);
+onScroll();
+</script>
 
 </body>
 </html>
